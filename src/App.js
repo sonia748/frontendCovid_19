@@ -1,29 +1,40 @@
-import React from "react";
+  import React from "react";
+// import GlobalStats from './Components/global'
 
-import GlobalStats from './Components/global'
-import cards from "./Components/Cards/cards";
-import chart from "./Components/Chart/chart";
-import countrySelector from "./Components/CountrySelector/countrySelector";
+   import Cards from "./Components/Cards/Cards";
+   import Chart from "./Components/Chart/Chart";
+   import CountrySelector from "./Components/CountrySelector/CountrySelector";
 
-import { fetchData} from "./Api";
-import styles from './App.modules.css';
+   import { fetchData} from "./Api";
+  import styles from './App.modules.css';
 
+class App extends React.Component {
+    state = {
+        data: {},
+        country: '',
+    }
 
-function App(){
+          async componentDidMount() {
+              const fetchedData = await fetchData();
+              this.setState({data: fetchedData });
+          }
 
+          handleCountryChange = async (country) =>{
+              const fetchedData = await fetchData(country);
+              this.setState({data: fetchedData, country: country });
+          }
+          render() {
 
-    return (
+                  const { data, country } = this.state;
+                  return(
+                  <div className={styles.container}>
+                      <h1>COVID-19 Tracker</h1>
+                      <Cards data={ data }/>
+                      <Chart/>
+                      <CountrySelector handleCountryChange = {this.handleCountryChange}/>
+                  </div>
+              );
+          }
+      }
 
-        <div>
-                <h1>Covid-19 Tracker</h1>
-
-                <GlobalStats/>
-
-        </div>
-    )
-}
-
-
-
-
-export default App;
+      export default App;
