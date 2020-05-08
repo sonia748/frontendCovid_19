@@ -17,10 +17,12 @@ class App extends React.Component {
           async componentDidMount() {
               const fetchedData = await fetchData();
               this.setState({data: fetchedData });
+
+              console.log(this.state.data)
           }
 
           handleCountryChange = async (country) =>{
-              const fetchedData = await fetchData(country);
+             const fetchedData = await fetchData(country);
               this.setState({data: fetchedData, country: country });
           }
           render() {
@@ -29,9 +31,13 @@ class App extends React.Component {
                   return(
                   <div className={styles.container}>
                       <h1>COVID-19 Tracker</h1>
-                      <Cards data={ data }/>
-                      <Chart/>
                       <CountrySelector handleCountryChange = {this.handleCountryChange}/>
+
+                      <br/>
+                      <br/>
+
+                      <Cards data={ data }/>
+                      <Chart data={data}/>
                   </div>
               );
           }

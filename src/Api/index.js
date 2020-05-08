@@ -38,8 +38,12 @@ const url = "https://covid19.mathdro.id/api";
      }
       export const fetchCountries = async () => {
        try {
-         const { data: { countries }} = await axios.get(`${url}/countries`);
-        return countries.map((country) => country.name);
+         const countries = await axios.get(`${url}/countries`);
+
+
+
+            //console.log(countries.data.countries)
+        return countries.data.countries.map((country) => country.name);
              }catch (e) {
 //
          console.log(e);

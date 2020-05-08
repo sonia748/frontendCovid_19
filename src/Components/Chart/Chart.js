@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import {fetchDailyData, fetchData} from "../../Api";
 import { Line, Bar } from "react-chartjs-2";
 import styles from './chart.modules.css';
-const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
+
+const Chart = (props) => {
+
     const [dailyData, setDailyData] = useState({});
+
 
     useEffect(() => {
         const fetchAPI = async () => {
@@ -20,13 +23,13 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
                 labels: dailyData.map(({ date }) => date ),
                     datasets: [{
                     data: dailyData.map(({ confirmed }) => confirmed),
-                        label: 'Infected',
+                        label: 'Confirmed',
                         borderColor: '#3333ff',
                         fill: true,
 
                     }, {
                         data: dailyData.map(({ deaths }) => deaths),
-                        label: 'Infected',
+                        label: 'Deaths',
                         borderColor: 'red',
                         backgroundColor: 'rgba(255, 0, 0, 0.5)',
                         fill: true,
@@ -36,26 +39,26 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
         );
 
         const barChart = (
-            confirmed
+            props.confirmed
             ? (
                 <Bar data={{
                     labels: ['Infected.value', 'Recovered.value', 'Deaths.value'],
                     datasets: [{
                         label: 'People',
                         backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)',],
-                        data: [ confirmed, recovered, deaths ]
+                        data: [ props.confirmed, props.recovered, props.deaths ]
                     }]
                 }}
                      options={{
                          legend: { display: false },
-                         title: { display: true, text: `Current state in ${country}`},
+                         title: { display: true, text: `Current state in CA`},
                      }}
                 />
                 ): null
         )
     return (
-        <div className={styles.container}>
-            {country ? barChart: lineChart}
+        <div className="container">
+            {props.country ? barChart: lineChart}
         </div>
 
     )
