@@ -6,7 +6,7 @@
    import CountrySelector from "./Components/CountrySelector/CountrySelector";
 
    import { fetchData} from "./Api";
-  import styles from './App.modules.css';
+  import styles from './App.module.css';
 
 class App extends React.Component {
     state = {

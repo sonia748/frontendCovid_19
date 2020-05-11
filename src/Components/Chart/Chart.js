@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {fetchDailyData, fetchData} from "../../Api";
 import { Line, Bar } from "react-chartjs-2";
-import styles from './chart.modules.css';
+import styles from './chart.module.css';
 
 const Chart = (props) => {
 
@@ -57,7 +57,7 @@ const Chart = (props) => {
                 ): null
         )
     return (
-        <div className="container">
+        <div className={styles.container}>
             {props.country ? barChart: lineChart}
         </div>
 

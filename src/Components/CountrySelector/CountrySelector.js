@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NativeSelect, FormControl} from "@material-ui/core";
-import styles from './countrySelector.modules.css';
+import styles from './countrySelector.module.css';
 import { fetchCountries } from "../../Api";
 
 const CountrySelector = ( props )=> {
